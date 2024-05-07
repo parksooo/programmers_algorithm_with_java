@@ -1,5 +1,3 @@
-package out.production.programmers;
-
 import java.util.Arrays;
 
 public class TableHash {
