@@ -1,37 +1,21 @@
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 public class BigNumber_42746 {
-    Set<Long> SET = new HashSet<>();
-    boolean[] VISITED;
     public String solution(int[] numbers) {
-        VISITED = new boolean[numbers.length];
-        Long max = Long.MIN_VALUE;
-
-        dfs(Arrays.stream(numbers)
+        String[] str = Arrays.stream(numbers)
                 .mapToObj(String::valueOf)
-                .toArray(String[]::new),
-                "",
-                0);
+                .toArray(String[]::new);
 
-        for (Long n : SET) {
-            max = Math.max(max, n);
+        Arrays.sort(str, (o1, o2) -> (o2 + o1).compareTo(o1 + o2));
+
+        if (str[0].equals("0")) {
+            return "0";
         }
-
-        return String.valueOf(max);
+        return Arrays.stream(str)
+                .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append)
+                .toString();
     }
 
-    public void dfs(String[] nums, String str, int len) {
-        for (int i = 0; i < nums.length; i++) {
-            if (!VISITED[i]) {
-                VISITED[i] = true;
-                SET.add(Long.parseLong(str + nums[i]));
-                dfs(nums, str + nums[i], len + 1);
-                VISITED[i] = false;
-            }
-        }
-    }
 
     public static void main(String[] args) {
         System.out.println(
