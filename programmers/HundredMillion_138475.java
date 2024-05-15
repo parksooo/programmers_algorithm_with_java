@@ -10,14 +10,10 @@ public class HundredMillion_138475 {
         int[][] store = new int[e + 1][2];
         count[0] = -1;
 
-        for (int i = 1; i <= e; i++) {
-            count[i] = getDivisor(i);
-        }
+        getDivisor(count, e);
         store[e][0] = count[e];
         store[e][1] = e;
-
         storeDivisor(count, store, e);
-
         for (int i = 0; i < starts.length; i++) {
             answer[i] = store[starts[i]][1];
         }
@@ -37,19 +33,12 @@ public class HundredMillion_138475 {
         }
     }
 
-    private int getDivisor(int n) {
-        int sqrt = (int)Math.sqrt(n);
-        List<Integer> divisorList = new ArrayList<>();
-
-        for (int i = 1; i <= sqrt; i++) {
-            if (n % i == 0) {
-                divisorList.add(i);
-                if (n / i != i) {
-                    divisorList.add(i);
-                }
+    private void getDivisor(int[] n, int e) {
+        for (int i = 1; i <= e; i++) {
+            for (int j = 1; j <= (e / i); j++) {
+                n[i * j] += 1;
             }
         }
-        return divisorList.size();
     }
 
     public static void main(String[] args) {
