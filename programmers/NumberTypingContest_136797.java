@@ -12,7 +12,7 @@ public class NumberTypingContest_136797 {
 
     int[][][] dp;
     int[][] move = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-    int[][] diagonal = {{-1, -1,}, {1, -1}, {-1, 1}, {1, 1}};
+    int[][] diagonal = {{-1, -1}, {1, -1}, {-1, 1}, {1, 1}};
     int[][] w;
     int[] num;
     char[][] board = {{'1', '2', '3'}, {'4', '5', '6'}, {'7', '8', '9'}, {'*', '0', '#'}};
@@ -33,7 +33,7 @@ public class NumberTypingContest_136797 {
         for (int i = 0; i < n; i++) {
             num[i] = numbers.charAt(i) - '0';
             for (int j = 0; j < 10; j++) {
-                Arrays.fill(dp[i][j], -1);
+                Arrays.fill(dp[i][j], Integer.MAX_VALUE);
             }
         }
 
@@ -57,9 +57,9 @@ public class NumberTypingContest_136797 {
             return 0;
         }
 
-        if (dp[index][left][right] == -1) {
-            int first = -1;
-            int second = -1;
+        if (dp[index][left][right] == Integer.MAX_VALUE) {
+            int first = Integer.MAX_VALUE;
+            int second = Integer.MAX_VALUE;
             // 눌러야 할 숫자에 오른쪽 손가락이 위치해있다면 왼쪽 손가락으로 누를 수 없음
             if (right != num[index]) {
                 first = w[left][num[index]] + getMinTime(index + 1, num[index], right);
@@ -117,7 +117,7 @@ public class NumberTypingContest_136797 {
 
     public static void main(String[] args) {
         System.out.println(
-                new NumberTypingContest_136797().solution("1756")
+                new NumberTypingContest_136797().solution("5123")
         );
     }
 }
